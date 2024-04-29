@@ -78,7 +78,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.gray[100]}>
-                  ADMINS
+                  HUWI STYLE
                 </Typography>
                 <IconButton onClick={() => setIscollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -108,12 +108,12 @@ const Sidebar = () => {
 
                 <Box justifyContent="center" alignItems="center">
                   <Typography
-                    variant="h2"
+                    variant="h3"
                     color={colors.gray[100]}
                     fontWeight="bold"
                     sx={{ m: "10px 0 0 0" }}
                   >
-                    Abhi Pawara
+                    Sachin Pawara
                   </Typography>
                   <Typography variant="h5" color={colors.greenAccent[500]}>
                     Admin
@@ -141,21 +141,21 @@ const Sidebar = () => {
               Data
             </Typography>
             <Item
-              title="Employees"
+              title="Employee"
               to="/employee"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Contacts Information"
+              title="Attaindance"
               to="/contacts"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Invoices Balances"
+              title="Payroll"
               to="/invoices"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}

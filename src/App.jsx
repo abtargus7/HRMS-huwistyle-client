@@ -6,6 +6,7 @@ import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import { Routes, Route } from 'react-router-dom';
 import Employee from "./scenes/employee";
+import Attendance from './scenes/attendance';
 
 
 function App() {
@@ -20,8 +21,9 @@ function App() {
                 <main className="content">
                   <Topbar />
                   <Routes>
-                    <Route path='/' element={<Dashboard username="Sachin Pawara" />} />
+                    <Route path='/' element={<Dashboard />} />
                     <Route path='/employee' element={<Employee />} />
+                    <Route path="/attendance" element={<Attendance />} />
                   </Routes>
                 </main>
             </div>

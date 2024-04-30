@@ -7,6 +7,7 @@ import Dashboard from "./scenes/dashboard";
 import { Routes, Route } from 'react-router-dom';
 import Employee from "./scenes/employee";
 import Attendance from './scenes/attendance';
+import AddEmployee from './scenes/add_employee';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                   <Routes>
                     <Route path='/' element={<Dashboard />} />
                     <Route path='/employee' element={<Employee />} />
+                    <Route path='/employee/add' element={<AddEmployee />} />
                     <Route path="/attendance" element={<Attendance />} />
                   </Routes>
                 </main>

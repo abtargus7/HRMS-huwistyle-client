@@ -79,10 +79,10 @@ const AddEmployee = () => {
                 label="Personal Email"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.email}
-                name="email"
-                error={!!touched.email && !!errors.email}
-                helperText={touched.email && errors.email}
+                value={values.personalEmail}
+                name="personalEmail"
+                error={!!touched.personalEmail && !!errors.personalEmail}
+                helperText={touched.personalEmail && errors.personalEmail}
                 sx={{ gridColumn: "span 2 " }}
               />
               <TextField
@@ -169,7 +169,7 @@ const AddEmployee = () => {
                 label="Bank Name"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.address2}
+                value={values.bankName}
                 name="bankName"
                 error={!!touched.bankName && !!errors.bankName}
                 helperText={touched.bankName && errors.bankName}
@@ -182,7 +182,7 @@ const AddEmployee = () => {
                 label="Account Holder Name"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.address2}
+                value={values.accountHolderName}
                 name="accountHolderName"
                 error={!!touched.accountHolderName && !!errors.accountHolderName}
                 helperText={touched.accountHolderName && errors.accountHolderName}
@@ -255,14 +255,15 @@ const AddEmployee = () => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.allowances}
-                name="basicSalary"
+                name="allowances"
                 error={!!touched.allowances && !!errors.allowances}
                 helperText={touched.allowances && errors.allowances}
                 sx={{ gridColumn: "span 2" }}
               />
             </Box>
-
-            <Button variant="soft" size="md">Submit</Button>
+            <Box display={"flex"} justifyContent={"end"} m={"20px 0 0 20px"}>
+            <Button type="submit" color="secondary" variant="contained">Add new Employee</Button>
+            </Box>
           </form>
         )}
       </Formik>
@@ -283,7 +284,6 @@ const checkoutSchema = yup.object().shape({
     .matches(phoneRegExp, "Phone number is not valid")
     .required("required"),
   address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
   bankName: yup.string().required("required"),
   accountHolderName: yup.string().required("required"),
   accountNumber: yup.string().required("required"),
@@ -305,7 +305,7 @@ const initialValues = {
   ifscCode: "",
   accomodation: "",
   allowances: "",
-
+  basicSalary: "",
   accountNumber: "",
 };
 

@@ -10,6 +10,7 @@ import Attendance from './scenes/attendance';
 import AddEmployee from './scenes/employee/add_employee';
 import Departments from './scenes/department';
 import AddDepartment from './scenes/department/add_department';
+import Calendar from './scenes/calendar';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/attendance" element={<Attendance />} />
                     <Route path='/department' element={<Departments />} />
                     <Route path='/department/add' element={<AddDepartment />} />
+                    <Route path="/calendar" element={<Calendar />} />
                   </Routes>
                 </main>
             </div>

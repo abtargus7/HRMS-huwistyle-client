@@ -4,7 +4,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CircularProgress,
   SvgIcon,
   Typography,
   useTheme,

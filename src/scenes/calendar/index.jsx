@@ -65,9 +65,8 @@ const Calendar = () => {
                                             day: "numeric"
                                         })}
                                     </Typography>
-                                }
+                                }  
                             >
-
                             </ListItemText>
                         </ListItem>
                     })}

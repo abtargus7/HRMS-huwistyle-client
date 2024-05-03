@@ -5,6 +5,8 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../../components/Header";
 import { tokens } from "../../../theme";
+// import axios from "axios";
+import { useEffect } from "react";
 
 const AddEmployee = () => {
   const handleFormSubmit = (values) => {
@@ -13,6 +15,17 @@ const AddEmployee = () => {
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+
+  // useEffect(() => {
+  //   axios.get("")
+  //   .then((Response) => console.log(Response))
+  //   .catch((error) => console.error(error));
+  //   return () => {
+      
+  //   }
+  // }, [])
+  
 
   return (
     <Box m="20px">
@@ -46,6 +59,19 @@ const AddEmployee = () => {
                 Personal Data
               </Typography>
 
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Employee Id"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.employeeId}
+                name="employeeId"
+                error={!!touched.employeeId && !!errors.employeeId}
+                helperText={touched.employeeId && errors.employeeId}
+                sx={{ gridColumn: "span 2" }}
+              />
               <TextField
                 fullWidth
                 variant="filled"
@@ -289,6 +315,7 @@ const checkoutSchema = yup.object().shape({
   accountNumber: yup.string().required("required"),
   ifscCode: yup.string().required("required"),
   basicSalary: yup.string().required("required"),
+  employeeId: yup.string().required("required")
 
 });
 const initialValues = {
@@ -307,6 +334,7 @@ const initialValues = {
   allowances: "",
   basicSalary: "",
   accountNumber: "",
-};
+  employeeId: ""
+};  
 
 export default AddEmployee;

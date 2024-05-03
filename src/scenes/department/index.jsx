@@ -22,7 +22,7 @@ const Departments = () => {
     <Box m={"20px"}>
       <Box display={"flex"} justifyContent={"space-between"}>
         <Header title="DEPARTMENTS" subtitle={"Manage the Departments"} />
-        <Link to={"/department/add"}>
+        <Link to={"/api/v1/department/add"}>
           <Button variant="soft" size="sm">
             {" "}
             Add department{" "}

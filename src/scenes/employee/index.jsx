@@ -27,7 +27,7 @@ const Employee = () => {
       <Box display={"flex"} justifyContent={"space-between"}>
         <Header title="EMPLOYEES" subtitle="Manage the Team Members" />
         <Button variant="soft" size="sm">
-          <Link to={"/employee/add"}>Add Employees</Link>
+          <Link to={"/api/v1/employee/add"}>Add Employees</Link>
         </Button>
       </Box>
 

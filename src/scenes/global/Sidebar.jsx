@@ -114,7 +114,7 @@ const Sidebar = () => {
                     fontWeight="bold"
                     sx={{ m: "10px 0 0 0" }}
                   >
-                    Sachin Pawara
+                    Abhi Pawara
                   </Typography>
                   <Typography variant="h5" color={colors.greenAccent[500]}>
                     Admin

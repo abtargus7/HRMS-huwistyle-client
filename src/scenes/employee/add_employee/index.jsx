@@ -180,6 +180,41 @@ const AddEmployee = () => {
                 sx={{ gridColumn: "span 4" }}
               />
 
+<Typography
+                variant="h6"
+                color={colors.gray[300]}
+                sx={{ m: "15px 0 5px 20px", gridColumn: "span 4" }}
+              >
+                Job Details
+              </Typography>
+
+              {/* Dropdown list is required for department tab */}
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Department Name"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.departmentName}
+                name="departmentName"
+                error={!!touched.departmentName && !!errors.departmentName}
+                helperText={touched.departmentName && errors.departmentName}
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Designation"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.designation}
+                name="designation"
+                error={!!touched.designation && !!errors.designation}
+                helperText={touched.designation && errors.designation}
+                sx={{ gridColumn: "span 2" }}
+              />
 
               <Typography
                 variant="h6"
@@ -315,8 +350,7 @@ const checkoutSchema = yup.object().shape({
   accountNumber: yup.string().required("required"),
   ifscCode: yup.string().required("required"),
   basicSalary: yup.string().required("required"),
-  employeeId: yup.string().required("required")
-
+  employeeId: yup.string().required("required"),
 });
 const initialValues = {
   firstName: "",
@@ -326,7 +360,7 @@ const initialValues = {
   contactNumber: "",
   address1: "",
   address2: "",
-  departments: "",
+  departmentName: "",
   bankName: "",
   accountHolderName: "",
   ifscCode: "",
@@ -334,7 +368,8 @@ const initialValues = {
   allowances: "",
   basicSalary: "",
   accountNumber: "",
-  employeeId: ""
+  employeeId: "",
+  designation: "",
 };  
 
 export default AddEmployee;

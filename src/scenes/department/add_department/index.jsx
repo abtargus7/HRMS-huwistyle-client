@@ -6,21 +6,39 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../../components/Header";
 import { tokens } from "../../../theme";
 import { useEffect } from "react";
-// import axios from "axios";
+import axios from "axios";
 
 const AddDepartment = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
     const handleFormSubmit = (values) => {
-        console.log(values);
+        axios.post("/api/v1/department/add", {
+            departmentId : values.departmentId,
+            departmentName: values.departmentName,
+            managerName: values.managerName
+        })
+        .then((response) => console.log(response))
+        .catch(error => console.log(error))
       };
 
+    // const handleFormSubmit = async (values) => {
+    //     const res = await fetch("/api/v1/department/add");
+    //     console.log(res);
+    // }
+
+    //   const fetchData = async() => {
+    //     const res = await fetch("/api/v1/department/add");
+    //     console.log(res);
+    //   }
+      
     // useEffect(() => {
     //   axios.get("/api/v1")
     //   .then((response) => console.log(response))
     //   .catch((error) => console.log(error))
     // }, [])
+
+    
     
     return <Box m="20px">
       <Header title={"NEW DEPARTMENT"} subtitle={"Add new Department"} />

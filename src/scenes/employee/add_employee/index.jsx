@@ -1,31 +1,62 @@
 import { Box, Button, TextField, Typography, useTheme } from "@mui/material";
 import { Formik, Field } from "formik";
-// import { Dropdown } from "formik"
 import * as yup from "yup";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../../components/Header";
 import { tokens } from "../../../theme";
-// import axios from "axios";
-import { useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const AddEmployee = () => {
-  const handleFormSubmit = (values) => {
-    console.log(values);
-  };
+  const [departmentsList, setDepartmentsList] = useState([]);
+  const [designationList, setDesignationList] = useState([]);
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const getDepartments = async () => {
+    const response = await fetch("/api/v1/employee/add/getDepartments");
+    const data = await response.json();
+    // console.log(data);
+    setDepartmentsList(data)
+    // handleChange
+  };
 
-  // useEffect(() => {
-  //   axios.get("")
-  //   .then((Response) => console.log(Response))
-  //   .catch((error) => console.error(error));
-  //   return () => {
-      
-  //   }
-  // }, [])
-  
+  const onStateChange = async (event) => {
+    // console.log(event.target.value);
+    const result = await axios.get(`/api/v1/employee/add/getDesignations/${event.target.value}`);
+    // console.log(result);
+    setDesignationList(result.data);
+  };
+
+  useEffect(() => {
+    getDepartments();
+  }, []);
+
+  const handleFormSubmit = (values) => {
+    console.log(values);
+    axios
+      .post("/api/v1/employee/add", {
+        employeeId: values.employeeId,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        personalEmail: values.personalEmail,
+        officeEmail: values.officeEmail,
+        contactNumber: values.contactNumber,
+        address1: values.address1,
+        address2: values.address2,
+        departments: values.departments,
+        designations: values.designations,
+        bankName: values.bankName,
+        accountHolderName: values.accountHolderName,
+        accountNumber: values.accountNumber,
+        ifscCode: values.ifscCode,
+        basicSalary: values.basicSalary,
+        accomodation: values.accomodation,
+        allowances: values.allowances,
+      })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  };
 
   return (
     <Box m="20px">
@@ -137,22 +168,7 @@ const AddEmployee = () => {
                 helperText={touched.contactNumber && errors.contactNumber}
                 sx={{ gridColumn: "span 2" }}
               />
-              {/* <Field>
-                <Dropdown
-                  selection
-                  placeholder="Select a department"
-                  options={[
-                    { value: "IT", text: "Information Technology"},
-                    { value: "HR", text: "Human Resource"}
-                  ]}
-                  value={values.departments}
-                  onChange={(value) => {
-                    setFieldValue("city", value);
-                  }}
-                >
-
-                </Dropdown>
-              </Field> */}
+        
               <TextField
                 fullWidth
                 variant="filled"
@@ -180,7 +196,7 @@ const AddEmployee = () => {
                 sx={{ gridColumn: "span 4" }}
               />
 
-<Typography
+              <Typography
                 variant="h6"
                 color={colors.gray[300]}
                 sx={{ m: "15px 0 5px 20px", gridColumn: "span 4" }}
@@ -188,33 +204,30 @@ const AddEmployee = () => {
                 Job Details
               </Typography>
 
-              {/* Dropdown list is required for department tab */}
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Department Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.departmentName}
-                name="departmentName"
-                error={!!touched.departmentName && !!errors.departmentName}
-                helperText={touched.departmentName && errors.departmentName}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Designation"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.designation}
-                name="designation"
-                error={!!touched.designation && !!errors.designation}
-                helperText={touched.designation && errors.designation}
-                sx={{ gridColumn: "span 2" }}
-              />
+              <Field
+                // label="Departments"
+                as="select"
+                name="departments"
+                onChange={(event) => {
+                  onStateChange(event);
+                }}
+              >
+                <option value="">Select</option>
+                {departmentsList.map((dept, index) => (
+                  <option key={index} value={dept.departmentName}>
+                    {dept.departmentName}
+                  </option>
+                ))}
+              </Field>
+
+              <Field as="select" name="designations" onChange={handleChange}>
+                <option value="">Select</option>
+                {designationList.map((des, index) => (
+                  <option key={index} value={des.desName}>
+                    {des.desName}
+                  </option>
+                ))}
+              </Field>
 
               <Typography
                 variant="h6"
@@ -245,8 +258,12 @@ const AddEmployee = () => {
                 onChange={handleChange}
                 value={values.accountHolderName}
                 name="accountHolderName"
-                error={!!touched.accountHolderName && !!errors.accountHolderName}
-                helperText={touched.accountHolderName && errors.accountHolderName}
+                error={
+                  !!touched.accountHolderName && !!errors.accountHolderName
+                }
+                helperText={
+                  touched.accountHolderName && errors.accountHolderName
+                }
                 sx={{ gridColumn: "span 2" }}
               />
               <TextField
@@ -323,7 +340,9 @@ const AddEmployee = () => {
               />
             </Box>
             <Box display={"flex"} justifyContent={"end"} m={"20px 0 0 20px"}>
-            <Button type="submit" color="secondary" variant="contained">Add new Employee</Button>
+              <Button type="submit" color="secondary" variant="contained">
+                Add new Employee
+              </Button>
             </Box>
           </form>
         )}
@@ -351,6 +370,7 @@ const checkoutSchema = yup.object().shape({
   ifscCode: yup.string().required("required"),
   basicSalary: yup.string().required("required"),
   employeeId: yup.string().required("required"),
+  // departments: yup.string().required("required")
 });
 const initialValues = {
   firstName: "",
@@ -360,7 +380,7 @@ const initialValues = {
   contactNumber: "",
   address1: "",
   address2: "",
-  departmentName: "",
+  // departments: "",
   bankName: "",
   accountHolderName: "",
   ifscCode: "",
@@ -369,7 +389,7 @@ const initialValues = {
   basicSalary: "",
   accountNumber: "",
   employeeId: "",
-  designation: "",
-};  
+  // designations: "",
+};
 
 export default AddEmployee;

@@ -38,7 +38,7 @@ const Employee = () => {
               key={index}
               variant="solid"
               color="primary"
-              invertedColors
+              // invertedColors
               sx={{ display: "flex", justifyContent: "space-between" }}
             >
               <CardContent orientation="horizontal">

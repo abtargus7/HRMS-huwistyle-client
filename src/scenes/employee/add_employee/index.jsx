@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 const AddEmployee = () => {
   const [departmentsList, setDepartmentsList] = useState([]);
   const [designationList, setDesignationList] = useState([]);
+  const [selectDepartment, setSelectDepartment] = useState();
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -23,6 +24,7 @@ const AddEmployee = () => {
 
   const onStateChange = async (event) => {
     // console.log(event.target.value);
+    Formik.departments = event.target.value;
     const result = await axios.get(`/api/v1/employee/add/getDesignations/${event.target.value}`);
     // console.log(result);
     setDesignationList(result.data);
@@ -32,7 +34,7 @@ const AddEmployee = () => {
     getDepartments();
   }, []);
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = (values,event) => {
     console.log(values);
     axios
       .post("/api/v1/employee/add", {
@@ -44,7 +46,7 @@ const AddEmployee = () => {
         contactNumber: values.contactNumber,
         address1: values.address1,
         address2: values.address2,
-        departments: values.departments,
+        // departmentName: values.departmentName,
         designations: values.designations,
         bankName: values.bankName,
         accountHolderName: values.accountHolderName,
@@ -53,6 +55,7 @@ const AddEmployee = () => {
         basicSalary: values.basicSalary,
         accomodation: values.accomodation,
         allowances: values.allowances,
+        department: Formik.departments
       })
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
@@ -209,8 +212,9 @@ const AddEmployee = () => {
                 as="select"
                 name="departments"
                 onChange={(event) => {
-                  onStateChange(event);
+                  onStateChange(event)
                 }}
+                // value={values.departmentName}
               >
                 <option value="">Select</option>
                 {departmentsList.map((dept, index) => (

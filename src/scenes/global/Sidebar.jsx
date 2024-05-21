@@ -150,7 +150,7 @@ const Sidebar = () => {
             />
             <Item
               title="Departments"
-              to="/api/v1/department"
+              to="/api/v1/departments"
               icon={<CorporateFareIcon />}
               selected={selected}
               setSelected={setSelected}

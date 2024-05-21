@@ -29,8 +29,8 @@ function App() {
                     <Route path='/api/v1/employee' element={<Employee />} />
                     <Route path='/api/v1/employee/add' element={<AddEmployee />} />
                     <Route path="/api/v1/attendance" element={<Attendance />} />
-                    <Route path='/api/v1/department' element={<Departments />} />
-                    <Route path='/api/v1/department/add' element={<AddDepartment />} />
+                    <Route path='/api/v1/departments' element={<Departments />} />
+                    <Route path='/api/v1/departments/add' element={<AddDepartment />} />
                     <Route path="/api/v1/calendar" element={<Calendar />} />
                   </Routes>
                 </main>

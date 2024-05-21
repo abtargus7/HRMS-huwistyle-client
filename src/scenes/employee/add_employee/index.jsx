@@ -5,6 +5,9 @@ import Header from "../../../components/Header";
 import { tokens } from "../../../theme";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Select } from 'formik-mui';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
 
 const AddEmployee = () => {
   const [departmentsList, setDepartmentsList] = useState([]);
@@ -18,14 +21,16 @@ const AddEmployee = () => {
     const response = await fetch("/api/v1/employee/add/getDepartments");
     const data = await response.json();
     // console.log(data);
-    setDepartmentsList(data)
+    setDepartmentsList(data);
     // handleChange
   };
 
   const onStateChange = async (event) => {
     // console.log(event.target.value);
     Formik.departments = event.target.value;
-    const result = await axios.get(`/api/v1/employee/add/getDesignations/${event.target.value}`);
+    const result = await axios.get(
+      `/api/v1/employee/add/getDesignations/${event.target.value}`
+    );
     // console.log(result);
     setDesignationList(result.data);
   };
@@ -34,7 +39,7 @@ const AddEmployee = () => {
     getDepartments();
   }, []);
 
-  const handleFormSubmit = (values,event) => {
+  const handleFormSubmit = (values) => {
     console.log(values);
     axios
       .post("/api/v1/employee/add", {
@@ -46,7 +51,6 @@ const AddEmployee = () => {
         contactNumber: values.contactNumber,
         address1: values.address1,
         address2: values.address2,
-        // departmentName: values.departmentName,
         designations: values.designations,
         bankName: values.bankName,
         accountHolderName: values.accountHolderName,
@@ -55,7 +59,7 @@ const AddEmployee = () => {
         basicSalary: values.basicSalary,
         accomodation: values.accomodation,
         allowances: values.allowances,
-        department: Formik.departments
+        department: Formik.departments,
       })
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
@@ -72,7 +76,6 @@ const AddEmployee = () => {
       >
         {({
           values,
-          setFieldValue,
           errors,
           touched,
           handleBlur,
@@ -171,7 +174,7 @@ const AddEmployee = () => {
                 helperText={touched.contactNumber && errors.contactNumber}
                 sx={{ gridColumn: "span 2" }}
               />
-        
+
               <TextField
                 fullWidth
                 variant="filled"
@@ -207,31 +210,50 @@ const AddEmployee = () => {
                 Job Details
               </Typography>
 
+              {/* <Box> */}
+              <label>Department</label>
               <Field
-                // label="Departments"
+                // formControl={{ sx: sxFormControl }}
+                // component={Select}
+                // labelId="age-simple"
+                label="Department"
                 as="select"
                 name="departments"
                 onChange={(event) => {
-                  onStateChange(event)
+                  onStateChange(event);
                 }}
+                // sx={{ backgroundColor: colors.gray[400] }}
                 // value={values.departmentName}
               >
+                 {/* <MenuItem value={10}>Ten</MenuItem> */}
                 <option value="">Select</option>
                 {departmentsList.map((dept, index) => (
                   <option key={index} value={dept.departmentName}>
                     {dept.departmentName}
                   </option>
+                 
+                  
                 ))}
               </Field>
+              {/* </Box> */}
 
-              <Field as="select" name="designations" onChange={handleChange}>
+              {/* <Box> */}
+              <label>Designation</label>
+              <Field 
+                as="select"   
+                name="designations" 
+                onChange={handleChange}
+              >
+                {/* <MenuItem value={10}>Ten</MenuItem> */}
                 <option value="">Select</option>
                 {designationList.map((des, index) => (
                   <option key={index} value={des.desName}>
                     {des.desName}
                   </option>
+
                 ))}
               </Field>
+              {/* </Box> */}
 
               <Typography
                 variant="h6"

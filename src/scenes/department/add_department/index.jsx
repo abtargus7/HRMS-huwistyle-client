@@ -18,7 +18,7 @@ const AddDepartment = () => {
             departmentName: values.departmentName,
             managerName: values.managerName
         })
-        .then((response) => console.log(response))
+        .then((response) => console.log(response.data))
         .catch(error => console.log(error))
       };
 

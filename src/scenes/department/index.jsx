@@ -37,7 +37,6 @@ const Departments = () => {
               key={index}
               variant="solid"
               color="primary"
-              invertedColor
               sx={{ display: "flex", justifyContent: "space-between" }}
             >
                 <CardContent orientation="horizontal">

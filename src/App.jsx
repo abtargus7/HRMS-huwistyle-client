@@ -25,7 +25,7 @@ function App() {
                 <main className="content">
                   <Topbar />
                   <Routes>
-                    <Route path='/api/v1' element={<Dashboard />} />
+                    <Route path='/' element={<Dashboard />} />
                     <Route path='/api/v1/employee' element={<Employee />} />
                     <Route path='/api/v1/employee/add' element={<AddEmployee />} />
                     <Route path="/api/v1/attendance" element={<Attendance />} />

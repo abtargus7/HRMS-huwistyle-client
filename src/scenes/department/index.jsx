@@ -27,7 +27,6 @@ const Departments = () => {
         console.log(response.data)
         setDepartments(response.data.data)
         console.log(departments);
-      
       })
     .catch(error => console.log(error))
   }, [])
@@ -37,12 +36,16 @@ const Departments = () => {
     <Box m={"20px"}>
       <Box display={"flex"} justifyContent={"space-between"}>
         <Header title="DEPARTMENTS" subtitle={"Manage the Departments"} />
-        <Link to={"/api/v1/department/add"}>
+        <Link to={"/api/v1/departments/add"}>
           <Button variant="soft" size="sm">
-            {" "}
-            Add department{" "}
+            Add department
           </Button>
         </Link>
+        <Link to={"/api/v1/departments/designations/add"}>
+                <Button variant="soft" size="sm">
+                    Add Designation
+                </Button>
+            </Link>
       </Box>
 
       <Box m="40px 0 0 0" height="75vh">

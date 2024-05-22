@@ -20,8 +20,8 @@ const AddEmployee = () => {
   const getDepartments = async () => {
     const response = await fetch("/api/v1/employee/add/getDepartments");
     const data = await response.json();
-    // console.log(data);
-    setDepartmentsList(data);
+    console.log(data.data);
+    setDepartmentsList(data.data);
     // handleChange
   };
 

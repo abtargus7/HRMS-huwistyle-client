@@ -29,10 +29,10 @@ const AddEmployee = () => {
     // console.log(event.target.value);
     Formik.departments = event.target.value;
     const result = await axios.get(
-      `/api/v1/employee/add/getDesignations/${event.target.value}`
+      `/api/v1/designation`
     );
-    // console.log(result);
-    setDesignationList(result.data);
+    console.log(result.data);
+    setDesignationList(result.data.data);
   };
 
   useEffect(() => {
@@ -228,7 +228,7 @@ const AddEmployee = () => {
                  {/* <MenuItem value={10}>Ten</MenuItem> */}
                 <option value="">Select</option>
                 {departmentsList.map((dept, index) => (
-                  <option key={index} value={dept.departmentName}>
+                  <option key={index} value={dept._id}>
                     {dept.departmentName}
                   </option>
                  
@@ -247,8 +247,8 @@ const AddEmployee = () => {
                 {/* <MenuItem value={10}>Ten</MenuItem> */}
                 <option value="">Select</option>
                 {designationList.map((des, index) => (
-                  <option key={index} value={des.desName}>
-                    {des.desName}
+                  <option key={index} value={des._id}>
+                    {des.designationName}
                   </option>
 
                 ))}

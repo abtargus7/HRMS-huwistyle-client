@@ -8,7 +8,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid"; 
+import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataTeam } from "../../data/mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -17,21 +17,99 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const Employee = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [employees, setEmployees] = useState([]);
+
+  const columns = [
+    {
+      field: "employeeId",
+      headerName: "ID",
+    },
+    {
+    field: "firstName",
+      headerName: "Employee Name",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
+    {
+      field: "contactNumber",
+      headerName: "Phone Number",
+      flex: 1,
+    },
+    {
+      field: "officeEmail",
+      headerName: "Email",
+      flex: 1,
+    },
+    {
+      field: "designaton",
+      headerName: "Designation",
+      flex: 1,
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+    },
+  ];
+
+  useEffect(() => {
+    axios
+      .get("/api/v1/employee/")
+      .then((response) => {
+          console.log(response.data.data)
+          setEmployees(response.data.data)
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <Box m="20px">
       <Box display={"flex"} justifyContent={"space-between"}>
         <Header title="EMPLOYEES" subtitle="Manage the Team Members" />
         <Button variant="soft" size="sm">
-          <Link to={"/api/v1/employee/add"}>Add Employees</Link>
+          <Link to={"/employee/add"}>Add Employees</Link>
         </Button>
       </Box>
 
-      <Box m="40px 0 0 0" height="75vh">
+      <Box
+        m="40px 0 0 0"
+        height={"75vh"}
+        sx={{
+          "& .MuiDataGrid-root": {
+            border: "none",
+          },
+          "& .MuiDataGrid-cell": {
+            borderBottom: "none",
+          },
+          "& .name-column--cell": {
+            color: colors.greenAccent[300],
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: colors.blueAccent[700],
+            borderBottom: "none",
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.primary[400],
+          },
+          "& .MuiDataGrid-footerContainer": {
+            borderTop: "none",
+            backgroundColor: colors.blueAccent[700],
+          },
+        }}
+      >
+        <DataGrid
+          getRowId={(row) => row.employeeId}
+          rows={employees}
+          columns={columns}
+        />
+      </Box>
+
+      {/* <Box m="40px 0 0 0" height="75vh">
         {mockDataTeam.map((employee, index) => {
           return (
             <Card
@@ -69,7 +147,7 @@ const Employee = () => {
             </Card>
           );
         })}
-      </Box>
+      </Box> */}
     </Box>
   );
 };

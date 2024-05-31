@@ -143,28 +143,28 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Employees"
-              to="/api/v1/employee"
+              to="/employee"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Departments"
-              to="/api/v1/departments"
+              to="/departments"
               icon={<CorporateFareIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Attendance"
-              to="/api/v1/attendance"
+              to="/attendance"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Payroll"
-              to="/api/v1/invoices"
+              to="/invoices"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -179,14 +179,14 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Profile Form"
-              to="/api/v1/form"
+              to="/form"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Calendar"
-              to="/api/v1/calendar"
+              to="/calendar"
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

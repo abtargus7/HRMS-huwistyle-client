@@ -27,13 +27,13 @@ function App() {
                   <Topbar />
                   <Routes>
                     <Route path='/' element={<Dashboard />} />
-                    <Route path='/api/v1/employee' element={<Employee />} />
-                    <Route path='/api/v1/employee/add' element={<AddEmployee />} />
-                    <Route path="/api/v1/attendance" element={<Attendance />} />
-                    <Route path='/api/v1/departments' element={<Departments />} />
-                    <Route path='/api/v1/departments/add' element={<AddDepartment />} />
-                    <Route path="/api/v1/calendar" element={<Calendar />} />
-                    <Route path='/api/v1/departments/designations/add' element={<AddDesignations />} />
+                    <Route path='/employee' element={<Employee />} />
+                    <Route path='/employee/add' element={<AddEmployee />} />
+                    <Route path="/attendance" element={<Attendance />} />
+                    <Route path='/departments' element={<Departments />} />
+                    <Route path='/departments/add' element={<AddDepartment />} />
+                    <Route path="/calendar" element={<Calendar />} />
+                    <Route path='/departments/designations/add' element={<AddDesignations />} />
                   </Routes>
                 </main>
             </div>

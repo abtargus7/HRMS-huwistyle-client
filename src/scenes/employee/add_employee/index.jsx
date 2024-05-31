@@ -51,7 +51,7 @@ const AddEmployee = () => {
         contactNumber: values.contactNumber,
         address1: values.address1,
         address2: values.address2,
-        designations: values.designations,
+        designation: values.designations,
         bankName: values.bankName,
         accountHolderName: values.accountHolderName,
         accountNumber: values.accountNumber,

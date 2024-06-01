@@ -18,6 +18,10 @@ const Dashboard = () => {
 
     return <Box m='20px'>
         <Header title={"ATTENDANCE"} subtitle={"Mangage the attendace"} />
+
+        <Box m="40px">
+            
+        </Box>
     </Box>
 }
 

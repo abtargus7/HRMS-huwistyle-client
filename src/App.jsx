@@ -12,6 +12,9 @@ import Departments from './scenes/department';
 import AddDepartment from './scenes/department/add_department';
 import Calendar from './scenes/calendar';
 import AddDesignations from './scenes/designation';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { TodaySharp } from '@mui/icons-material';
 
 
 function App() {
@@ -38,6 +41,7 @@ function App() {
                 </main>
             </div>
         </ThemeProvider>
+        <ToastContainer />
     </ColorModeContext.Provider>
   )
 }

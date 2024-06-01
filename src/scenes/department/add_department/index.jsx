@@ -12,9 +12,12 @@ import { toast } from "react-toastify";
 const AddDepartment = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
     const notify = (addDepartmentResponse) => {
-      if(addDepartmentResponse.data.flag === true){
-        toast.success(`🦄 ${addDepartmentResponse.data.message}`, {
+      const { success, message } = addDepartmentResponse.data;
+
+      if(success === true){
+        toast.success(`🦄 ${message}`, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -23,10 +26,9 @@ const AddDepartment = () => {
           draggable: true,
           progress: undefined,
           theme: "dark",
-     
           });
-      } else if(addDepartmentResponse.data.flag === false) {
-        toast.error('🦄 Something went wrong!', {
+      } else if(success === false) {
+        toast.error(`🦄 ${message}`, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -35,7 +37,6 @@ const AddDepartment = () => {
           draggable: true,
           progress: undefined,
           theme: "dark",
-    
           });
       }
     }
@@ -81,7 +82,6 @@ const AddDepartment = () => {
       >
         {({
           values,
-          setFieldValue,
           errors,
           touched,
           handleBlur,

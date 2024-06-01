@@ -7,21 +7,51 @@ import * as yup from "yup";
 // import { TextField } from "formik-mui";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AddDesignations = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [departmentsList, setDepartmentsList] = useState([]);
 
+  const notify = (addDesignationResponse) => {
+    const { success, message } = addDesignationResponse.data;
+
+    if (success === true) {
+      toast.success(`🦄 ${message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else if (success === false) {
+      toast.error(`🦄 ${message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  };
+
   const handleFormSubmit = async (values) => {
     console.log(values);
-    await axios.post("/api/v1/designation/add", {
+    const addDesignationResponse = await axios.post("/api/v1/designation/add", {
       designationId: values.designationId,
       designationName: values.designationName,
-      departments: values.departments
-    })
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error))
+      departments: values.departments,
+    });
+
+    console.log(addDesignationResponse);
+    notify(addDesignationResponse);
   };
 
   const getDepartments = async () => {
@@ -45,7 +75,6 @@ const AddDesignations = () => {
   //   // console.log(result);
   //   setDesignationList(result.data);
   // };
-  
 
   return (
     <Box m="20px">
@@ -116,14 +145,12 @@ const AddDesignations = () => {
                 // sx={{ backgroundColor: colors.gray[400] }}
                 // value={values.departmentName}
               >
-                 {/* <MenuItem value={10}>Ten</MenuItem> */}
+                {/* <MenuItem value={10}>Ten</MenuItem> */}
                 <option value="">Select</option>
                 {departmentsList.map((dept, index) => (
                   <option key={index} value={dept._id}>
                     {dept.departmentName}
                   </option>
-                 
-                  
                 ))}
               </Field>
             </Box>

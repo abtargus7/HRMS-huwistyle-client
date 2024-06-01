@@ -7,20 +7,51 @@ import Header from "../../../components/Header";
 import { tokens } from "../../../theme";
 import { useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AddDepartment = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const notify = (addDepartmentResponse) => {
+      if(addDepartmentResponse.data.flag === true){
+        toast.success(`🦄 ${addDepartmentResponse.data.message}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+     
+          });
+      } else if(addDepartmentResponse.data.flag === false) {
+        toast.error('🦄 Something went wrong!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+    
+          });
+      }
+    }
 
-    const handleFormSubmit = (values) => {
-        axios.post("/api/v1/department/add", {
+    const handleFormSubmit = async (values) => {
+        const addDepartmentResponse = await axios.post("/api/v1/departments/add", {
             departmentId : values.departmentId,
             departmentName: values.departmentName,
             managerName: values.managerName
         })
-        .then((response) => console.log(response.data))
-        .catch(error => console.log(error))
+        
+        console.log(addDepartmentResponse);
+        notify(addDepartmentResponse);
       };
+
+
 
     // const handleFormSubmit = async (values) => {
     //     const res = await fetch("/api/v1/department/add");

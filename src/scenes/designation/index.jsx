@@ -4,43 +4,17 @@ import Header from "../../components/Header";
 import { Link } from "react-router-dom";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
-// import { TextField } from "formik-mui";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
+import notification from "../../components/notification.js";
+
 
 const AddDesignations = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [departmentsList, setDepartmentsList] = useState([]);
 
-  const notify = (addDesignationResponse) => {
-    const { success, message } = addDesignationResponse.data;
-
-    if (success === true) {
-      toast.success(`🦄 ${message}`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    } else if (success === false) {
-      toast.error(`🦄 ${message}`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    }
-  };
 
   const handleFormSubmit = async (values) => {
     console.log(values);
@@ -51,7 +25,7 @@ const AddDesignations = () => {
     });
 
     console.log(addDesignationResponse);
-    notify(addDesignationResponse);
+    notification(addDesignationResponse);
   };
 
   const getDepartments = async () => {

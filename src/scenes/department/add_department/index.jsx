@@ -1,6 +1,5 @@
 import { Box, Button, TextField, Typography, useTheme } from "@mui/material";
 import { Formik, Field } from "formik";
-// import { Dropdown } from "formik"
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../../components/Header";
@@ -8,38 +7,11 @@ import { tokens } from "../../../theme";
 import { useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import notification from "../../../components/notification";
 
 const AddDepartment = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-
-    const notify = (addDepartmentResponse) => {
-      const { success, message } = addDepartmentResponse.data;
-
-      if(success === true){
-        toast.success(`🦄 ${message}`, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          });
-      } else if(success === false) {
-        toast.error(`🦄 ${message}`, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          });
-      }
-    }
 
     const handleFormSubmit = async (values) => {
         const addDepartmentResponse = await axios.post("/api/v1/departments/add", {
@@ -49,28 +21,8 @@ const AddDepartment = () => {
         })
         
         console.log(addDepartmentResponse);
-        notify(addDepartmentResponse);
+        notification(addDepartmentResponse);
       };
-
-
-
-    // const handleFormSubmit = async (values) => {
-    //     const res = await fetch("/api/v1/department/add");
-    //     console.log(res);
-    // }
-
-    //   const fetchData = async() => {
-    //     const res = await fetch("/api/v1/department/add");
-    //     console.log(res);
-    //   }
-      
-    // useEffect(() => {
-    //   axios.get("/api/v1")
-    //   .then((response) => console.log(response))
-    //   .catch((error) => console.log(error))
-    // }, [])
-
-    
     
     return <Box m="20px">
       <Header title={"NEW DEPARTMENT"} subtitle={"Add new Department"} />

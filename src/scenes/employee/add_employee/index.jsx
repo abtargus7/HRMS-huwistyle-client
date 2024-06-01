@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Select } from 'formik-mui';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import notification from "../../../components/notification";
 
 const AddEmployee = () => {
   const [departmentsList, setDepartmentsList] = useState([]);
@@ -39,9 +40,9 @@ const AddEmployee = () => {
     getDepartments();
   }, []);
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = async(values) => {
     console.log(values);
-    axios
+    const addEmployeeResponse = await axios
       .post("/api/v1/employee/add", {
         employeeId: values.employeeId,
         firstName: values.firstName,
@@ -61,8 +62,9 @@ const AddEmployee = () => {
         allowances: values.allowances,
         department: Formik.departments,
       })
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      
+      console.log(addEmployeeResponse);
+      notification(addEmployeeResponse);
   };
 
   return (
